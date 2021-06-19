@@ -35,14 +35,23 @@
     <!-- More info: https://developer.chrome.com/multidevice/android/installtohomescreen -->
 </head>
 <body>
-<div class="bg">
-    <div class="deathstar"></div>
-</div>
+    <div class="conWarp" onclick="punchit()">
+        <span class="playButton btn">Punch it!</span>
+    </div>
+
+    <div class="bg">
+        <div class="deathstar"></div>
+        <div class="ohbm">
+            <img width="30%" src="https://firebasestorage.googleapis.com/v0/b/sparkle-ohbm.appspot.com/o/users%2FMmLlloenTiO9BRxui8tA4YsTgS13%2Fvenues%2Fhome%2F0150499879102018%2FOHBM_Map_Brain_background.png?alt=media&token=ffdcbca4-3609-4a1b-8179-2a41814eb6f5">
+        </div>
+    </div>
 <article class="starwars">
   <audio preload="auto">
     <source src="tfa.ogg" type="audio/ogg" />
     <source src="tfa.mp3" type="audio/mpeg" />
   </audio>
+
+  <!--
   <div id="loader" class="verticalWrapper" style="display:none">
     <div class="inner">
         <div class="bb8">
@@ -53,7 +62,7 @@
               <div class="orange-stripe"></div>
               <div class="hat"></div>
               <div class="eye"></div>
-              <div class="eye-large">		</div>
+              <div class="eye-large"></div>
             </div>
           </div>
           <div class="bb8-body">
@@ -79,11 +88,11 @@
         </div>
     </div>
   </div>
+  -->
 
   <div class="animation">
 
       <div class="introBg">
-
       </div>
     <div class="verticalWrapper">
         <section id="intro" class="intro noselect">
@@ -105,15 +114,15 @@
         <section class="logo noselect">
           <img id="logoimg" src="logo.svg" />
           <svg id="logosvg" viewBox="0 0 750 500">
-              <text letter-spacing="15px" x="50%" y="50%" text-anchor="middle" fill="none" stroke-width="8px" stroke="#ffd54e"></text>
+              <text letter-spacing="15px" x="50%" y="70%" text-anchor="middle" fill="none" stroke-width="8px" stroke="#ffd54e"></text>
+              <!--
               <text letter-spacing="15px" x="50%" y="85%" text-anchor="middle" fill="none" stroke-width="8px" stroke="#ffd54e"></text>
+              -->
           </svg>
       </section>
     </div>
   </div>
 </article>
-<div id="createdIntros" class="pageHide">
-</div>
 <div id="footer" class="pageHide">
     Developed by <a href="https://github.com/BrOrlandi" target="2">Bruno Orlandi</a> and <a href="https://github.com/nihey" target="2">Nihey Takizawa</a> based on <a href="http://timpietrusky.com/star-wars-opening-crawl-from-1977" target="2">Tim Pietrusky</a> work.
 </div>
@@ -143,10 +152,13 @@ $(document).scroll(function (e) {
         $('body').scrollTop(val);
     }
 })
+setTimeout(()=>{
+  console.log("done with animation!")
+  punchit();
+}, 110*1000);
 </script>
 <!-- build:js ./main.js -->
 <script src="StarWars.js"></script>
-<script src="createdIntros.js"></script>
 <script src="errorFunction.js"></script>
 <script src="main.js"></script>
 </body>

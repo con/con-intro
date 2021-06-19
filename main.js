@@ -18,6 +18,9 @@ var loadData = function () {
 };
 document.body.addEventListener('touchstart', loadData);
 
+function punchit() {
+    document.location = 'https://centerforopenneuroscience.org/';
+}
 
 // prevent arrow scrolling in firefox
 window.addEventListener("keydown", function(e) {
@@ -32,17 +35,6 @@ window.addEventListener("keydown", function(e) {
 
 var notPlayed = true;
 var showFooter = true;
-window.setLoading = function (){
-    $('#loader').show();
-    $('#form-starwars').hide();
-}
-
-window.unsetLoading = function (){
-    $('#loader').hide();
-    $('#form-starwars').show();
-}
-
-setLoading();
 
 /*
 $('#form-starwars').submit(function(event) {
@@ -114,7 +106,7 @@ $(window).on('hashchange', function() {
     };
     */
 
-    $("#playBut").remove();
+    //$("#playBut").remove();
     //var params = location.hash.replace('#!/', '').split('/');
     //var key = params[0];
     //var edit = false;
@@ -179,7 +171,7 @@ $(window).on('hashchange', function() {
                 if(logoText.toLowerCase() != "star\nwars"){
                     var texts = $('#logosvg text',StarWars.animation);
                     texts[0].textContent = logo1;
-                    texts[1].textContent = logo2;
+                    //texts[1].textContent = logo2;
 
                     // calculate the svg viewBox using the number of characters of the longest world in the logo.
                     var logosize = logo1.length > logo2.length ? logo1 : logo2;
@@ -196,13 +188,15 @@ $(window).on('hashchange', function() {
                     $.when(StarWars.audioDefer).then(function(){
                         var buffered = StarWars.audio.buffered.end(StarWars.audio.buffered.length-1);
                         if(buffered == 0 && !audioIsLoaded){
-                            unsetLoading();
+                            //unsetLoading();
+                            /*
                             playbutton = $('<div class="verticalWrapper"><div class="playAudio"><button id="playBut" class="playButton" style="font-size: 80px">Play</button></div></div>');
                             $('body').append(playbutton);
                             $('#playBut',playbutton).click(function(){
-                                setLoading();
-                                playbutton.remove();
+                                //setLoading();
+                                //playbutton.remove();
                             });
+                            */
                             StarWars.audio.oncanplaythrough = function () {
                                 notPlayed = false;
                                 StarWars.play();
@@ -214,6 +208,7 @@ $(window).on('hashchange', function() {
                     });
                 };
 
+            /*
                 if(document.hasFocus()){ // play if has focus
                         play();
                 }else{
@@ -223,13 +218,15 @@ $(window).on('hashchange', function() {
                         }
                     });
                 }
+               */
+            play();
 
             //},
             //error: ajaxErrorFunction('Error when try to load the intro '+key)
             //});
         }catch(error){
             location.hash = "";
-            setLoading();
+            //setLoading();
         }
 });
 
@@ -256,7 +253,7 @@ function getInternetExplorerVersion()
 $(document).ready(function() {
     if(getInternetExplorerVersion() !== -1){
         sweetAlert("Internet Explorer Detected", "This website is not compatible with Internet Explorer, please use Chrome. Sorry for the inconvenience.", "error");
-        unsetLoading();
+        //unsetLoading();
         return;
     }
     defaultOpening = getOpeningFormValues(); // get the default opening from the default form values

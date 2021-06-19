@@ -77,6 +77,7 @@ StarWarsOpening = (function() {
         if($('.start').css('display') === 'block')
             $('body').removeClass('running');
       },10000);
+
     }, this));
   }
 
@@ -101,7 +102,7 @@ StarWarsOpening = (function() {
   StarWarsOpening.prototype.play = function(){
       this.start.hide();
       $('.pageHide').hide();
-      unsetLoading(); // grants the loader to hide. Sometimes doesn't hide, maybe due to history navigation in browser.
+      //unsetLoading(); // grants the loader to hide. Sometimes doesn't hide, maybe due to history navigation in browser.
       $('body').removeClass('running');
       $('body').addClass('running');
       $('body').scrollTop(0);
