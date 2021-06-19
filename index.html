@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <title>Star Wars Intro Creator</title>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Create your own Star Wars opening crawl." />
+
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="http://brorlandi.github.io/StarWarsIntroCreator/">
+    <meta property="og:title" content="Star Wars Intro Creator">
+    <meta property="og:site_name" content="Star Wars Intro Creator">
+    <meta property="og:description" content="Create your own Star Wars opening crawl.">
+    <meta property="og:image" content="http://brorlandi.github.io/StarWarsIntroCreator/preview.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:type" content="website">
+    <meta property="fb:app_id" content="966673750071792"/>
+
+
+    <link rel="shortcut icon" href="favicon.png">
+    <!-- build:css ./styles.css -->
+    <link rel="stylesheet" type="text/css" href="bb8.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="libs/sweetalert/dist/sweetalert.css">
+    <!-- endbuild -->
+
+    <!-- build:js ./vendor.js -->
+    <script src="libs/jquery/dist/jquery.min.js"></script>
+    <script src='libs/sweetalert/dist/sweetalert.min.js'></script>
+    <script src='libs/handlebars/handlebars.min.js'></script>
+    <!-- endbuild -->
+
+    <meta name="theme-color" content="#000">
+    <!-- Add to homescreen -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- More info: https://developer.chrome.com/multidevice/android/installtohomescreen -->
+</head>
+<body>
+<div class="bg">
+    <div class="deathstar"></div>
+</div>
+<article class="starwars">
+  <audio preload="auto">
+    <source src="tfa.ogg" type="audio/ogg" />
+    <source src="tfa.mp3" type="audio/mpeg" />
+  </audio>
+  <div id="loader" class="verticalWrapper" style="display:none">
+    <div class="inner">
+        <div class="bb8">
+          <div class="bb8-top">
+            <div class="bb8-antena"></div>
+            <div class="bb8-antena-2"></div>
+            <div class="bb8-head">
+              <div class="orange-stripe"></div>
+              <div class="hat"></div>
+              <div class="eye"></div>
+              <div class="eye-large">		</div>
+            </div>
+          </div>
+          <div class="bb8-body">
+            <div class="panel-1"></div>
+            <div class="panel-2">
+              <div class="inset-1"></div>
+              <div class="inset-2"></div>
+            </div>
+            <div class="panel-3">
+              <div class="inset-1"></div>
+              <div class="inset-2"></div>
+            </div>
+            <div class="panel-4">
+              <div class="inset-1"></div>
+              <div class="inset-2"></div>
+            </div>
+            <div class="panel-5">
+              <div class="inset-1"></div>
+              <div class="inset-2"></div>
+              <div class="plating"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="animation">
+
+      <div class="introBg">
+
+      </div>
+    <div class="verticalWrapper">
+        <section id="intro" class="intro noselect">
+        </section>
+    </div>
+
+    <section class="titles noselect">
+      <div style="width: 100%;">
+        <p id="episode" class="tcenter">
+        </p>
+        <p  id="title" class="tcenter">
+        </p>
+        <div id="text">
+        </div>
+      </div>
+    </section>
+
+    <div class="verticalWrapper">
+        <section class="logo noselect">
+          <img id="logoimg" src="logo.svg" />
+          <svg id="logosvg" viewBox="0 0 750 500">
+              <text letter-spacing="15px" x="50%" y="50%" text-anchor="middle" fill="none" stroke-width="8px" stroke="#ffd54e"></text>
+              <text letter-spacing="15px" x="50%" y="85%" text-anchor="middle" fill="none" stroke-width="8px" stroke="#ffd54e"></text>
+          </svg>
+      </section>
+    </div>
+  </div>
+</article>
+<div id="createdIntros" class="pageHide">
+</div>
+<div id="footer" class="pageHide">
+    Developed by <a href="https://github.com/BrOrlandi" target="2">Bruno Orlandi</a> and <a href="https://github.com/nihey" target="2">Nihey Takizawa</a> based on <a href="http://timpietrusky.com/star-wars-opening-crawl-from-1977" target="2">Tim Pietrusky</a> work.
+</div>
+<script>
+// logo size calc
+$(window).resize(function() {
+    $('#logoimg').css('width',$(window).width()+'px');
+    $('#logosvg').css('width',$(window).width()+'px');
+
+    if($(window).height() < $("#config").height()+50){ // allow scroll if the form doesn't fit on the window
+        $("body").css("overflow","auto");
+    }else{
+        $("body").css("overflow","hidden");
+        $('body').scrollTop(0);
+    }
+
+    $(".sweet-alert").css("margin-top",-$(".sweet-alert").outerHeight()/2);
+});
+$(window).load(function () {
+    $(window).trigger('resize');
+})
+$(document).scroll(function (e) {
+    var max_height = $("#config").height()+50 - $(window).height();
+    var height = $('body').scrollTop();
+    if(height > max_height+200){ // prevent scrolling to much and reaching the deathstar befor the time.
+        var val = max_height+200;
+        $('body').scrollTop(val);
+    }
+})
+</script>
+<!-- build:js ./main.js -->
+<script src="StarWars.js"></script>
+<script src="createdIntros.js"></script>
+<script src="errorFunction.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
