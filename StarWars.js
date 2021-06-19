@@ -86,7 +86,7 @@ StarWarsOpening = (function() {
    */
   StarWarsOpening.prototype.reset = function() {
     this.start.show(); // show config form
-    $('.pageHide').show(); // show footer and social buttons
+    //$('.pageHide').show(); // show footer and social buttons
     // reset the animation
     this.cloned = this.animation.clone(true);
     this.animation.remove();

@@ -56,6 +56,7 @@ button::-moz-focus-inner {
   font-size: 500%;
   font-weight: 400;
   color: #4bd5ee;
+ text-shadow: 0 0 3px #226d7a;
   opacity: 0;
   animation: intro 6s ease-out 1s; }
   @media (max-height: 720px) {
@@ -73,11 +74,12 @@ button::-moz-focus-inner {
     width: 300px; }
 
 .starwars .titles {
-  width: 14.65em;
+  /*width: 14.65em;*/
+  width: 16em;
   margin: 0 0 0 -7.325em;
   top: auto;
   bottom: 0;
-  height: 50em;
+  height: 70em;
   font-size: 350%;
   text-align: justify;
   overflow: hidden;
@@ -552,7 +554,7 @@ iframe {
 #title.SWFont {
   font-family: StarWarsTitle;
   font-weight: normal;
-  font-size: 210%;
+  font-size: 200%;
   transform: scaleY(1);
   margin-bottom: -0.1em;
   margin-top: 1.35em;
