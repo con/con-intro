@@ -315,7 +315,7 @@ button::-moz-focus-inner {
   bottom: 1150px;
   right: 100px; }
 .deathstar {
-    animation: floatStar 30s 90s forwards linear; }
+    animation: floatStar 30s 86s forwards linear; }
 @keyframes floatStar {
   0% {
     transform: translateX(100px); }
