@@ -20,7 +20,7 @@ const episodes = [
         "logo": "CON",
 
         "episode": "Episode II",
-        "title": "brainline.io", //will be uppercased (keep it short!)
+        "title": "brainlife.io", //will be uppercased (keep it short!)
 
         "text": "brainlife.io: A free cloud Free cloud platform for secure neuroscience data analysis!\n\nNeuroscience is engaging at the forefront of science by dissolving disciplinary boundaries and promoting transdisciplinary research. This process can facilitate discovery by convergent efforts from theoretical, experimental and cognitive neuroscience, as well as computer science and engineering.\n\nTo assure the success of this process, the current lack of established mechanisms to promote open sharing data, software and scientific results must be overcome. Promoting open software and data sharing has become paramount to addressing the problem of scientific reproducibility.\n\nbrainlife.io addresses challenges to neuroscience open sharing and reproducibility by providing integrative mechanisms for publishing data, and algorithms while embedding them with computing resources to impact multiple scientific communities.",
     },
