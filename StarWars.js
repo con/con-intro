@@ -60,6 +60,7 @@ StarWarsOpening = (function() {
 
     // Reset the animation and shows the start screen
     $(this.audio).bind('ended', $.proxy(function() {
+       /*
       this.audio.currentTime = 0;
       this.reset();
 
@@ -77,10 +78,9 @@ StarWarsOpening = (function() {
         if($('.start').css('display') === 'block')
             $('body').removeClass('running');
       },10000);
-        setTimeout(()=>{
-          console.log("done with animation!")
-          punchit();
-        }, 105*1000);
+        */
+
+      punchit();
 
     }, this));
   }
