@@ -22,7 +22,7 @@ const episodes = [
         "episode": "Episode II",
         "title": "brainlife.io", //will be uppercased (keep it short!)
 
-        "text": "brainlife.io: A Free cloud platform for secure neuroscience data analysis!\n\nNeuroscience is engaging at the forefront of science by dissolving disciplinary boundaries and promoting transdisciplinary research. This process can facilitate discovery by convergent efforts from theoretical, experimental and cognitive neuroscience, as well as computer science and engineering.\n\nTo assure the success of this process, the current lack of established mechanisms to promote open sharing data, software and scientific results must be overcome. Promoting open software and data sharing has become paramount to addressing the problem of scientific reproducibility.\n\nbrainlife.io addresses challenges to neuroscience open sharing and reproducibility by providing integrative mechanisms for publishing data, and algorithms while embedding them with computing resources to impact multiple scientific communities.",
+        "text": "brainlife.io: A Free cloud platform for secure neuroscience data analysis!\n\nNeuroscience is engaging at the forefront of science by dissolving disciplinary boundaries and promoting transdisciplinary research. This process can facilitate discovery by convergent efforts from theoretical, experimental and cognitive neuroscience, as well as computer science and engineering.\n\nTo assure the success of this process, the current lack of established mechanisms to promote open sharing data, software and scientific results must be overcome. Promoting open software and data sharing has become paramount to addressing the problem of scientific reproducibility.\n\nbrainlife.io addresses challenges to neuroscience open sharing and reproducibility by providing integrative mechanisms for publishing data, and algorithms while embedding them with computing resources to impact multiple scientific communities.\n\nTry brainlife.io today to experience the power of open platform!",
     },
 ];
 
@@ -133,114 +133,74 @@ $(window).on('hashchange', function() {
     //    edit = params[1] === "edit";
     //}catch(e){}
     $('body').removeClass('running');
-    const key = "con";
-        $('[name=custom]').val(key);
-        try{
-            //key = parseSpecialKeys(key);
-            //var url = urlByKey(key);
-            //$.ajax({
-            //  url: url,
-            //  success: function(opening) {
-            //    if(opening == null){
-            //        sweetAlert("Oops...", "Introduction not found!", "error");
-            //        return;
-            //    }
+    let counter = localStorage.getItem("counter") || Math.floor(Math.random()*100);
+    counter++;
+    localStorage.setItem("counter", counter);
+    const opening = episodes[counter%episodes.length]; 
+    StarWars.opening = opening;
+    console.log("picked episode", opening, counter);
 
-            //pick an episode randomly
-            const opening = episodes[Math.floor(Math.random()*episodes.length)]; 
-            StarWars.opening = opening;
-            //OpeningKey = key;
-            //$("#videoButton").show();
+    var intro = opening.intro.replace(/</g,"&lt;");
+    intro = intro.replace(/>/g,"&gt;");
+    intro = intro.replace(/\n/g,"<br>");
+    StarWars.animation.find("#intro").html(intro);
+    StarWars.animation.find("#episode").text(opening.episode);
 
-            var intro = opening.intro.replace(/</g,"&lt;");
-            intro = intro.replace(/>/g,"&gt;");
-            intro = intro.replace(/\n/g,"<br>");
-            StarWars.animation.find("#intro").html(intro);
-            StarWars.animation.find("#episode").text(opening.episode);
+    var title = StarWars.animation.find("#title")
+    if(checkCompatibleSWFont(opening.title)){
+        title.addClass('SWFont');
+    }
+    title.text(opening.title);
 
-            var title = StarWars.animation.find("#title")
-            if(checkCompatibleSWFont(opening.title)){
-                title.addClass('SWFont');
-            }
-            title.text(opening.title);
+    var ps = opening.text.split('\n');
 
-            var ps = opening.text.split('\n');
+    var div = StarWars.animation.find("#text");
+    div.text('');
+    for(var i in ps){
+        div.append($('<p>').text(ps[i]));
+    }
 
-            var div = StarWars.animation.find("#text");
-            div.text('');
-            for(var i in ps){
-                div.append($('<p>').text(ps[i]));
-            }
+    div.css('text-align',opening.center ? 'center':'');
 
-            div.css('text-align',opening.center ? 'center':'');
+    $('#logosvg',StarWars.animation).css('width',$(window).width()+'px'); // set width of the logo
+    $('#logoimg',StarWars.animation).css('width',$(window).width()+'px');
 
-            $('#logosvg',StarWars.animation).css('width',$(window).width()+'px'); // set width of the logo
-            $('#logoimg',StarWars.animation).css('width',$(window).width()+'px');
+    var logoText = opening.logo ? opening.logo : "star\nwars";
+    var aLogo = logoText.split('\n'); // breaks logo text in 2 lines
+    var logo1 = aLogo[0];
+    var logo2 = aLogo[1] || "";
+    var texts = $('#logosvg text',StarWars.animation);
+    texts[0].textContent = logo1;
+    texts[1].textContent = logo2;
 
-            var logoText = opening.logo ? opening.logo : "star\nwars";
-            var aLogo = logoText.split('\n'); // breaks logo text in 2 lines
-            var logo1 = aLogo[0];
-            var logo2 = aLogo[1] || "";
-            if(logoText.toLowerCase() != "star\nwars"){
-                var texts = $('#logosvg text',StarWars.animation);
-                texts[0].textContent = logo1;
-                texts[1].textContent = logo2;
+    // calculate the svg viewBox using the number of characters of the longest world in the logo.
+    var logosize = logo1.length > logo2.length ? logo1 : logo2;
+    var vbox = '0 0 '+logosize.length*200+' 500';
+    $('#logosvg',StarWars.animation).each(function () {$(this)[0].setAttribute('viewBox', vbox) });
+    $('#logosvg',StarWars.animation).show();
+    $('#logoimg',StarWars.animation).hide();
 
-                // calculate the svg viewBox using the number of characters of the longest world in the logo.
-                var logosize = logo1.length > logo2.length ? logo1 : logo2;
-                var vbox = '0 0 '+logosize.length*200+' 500';
-                $('#logosvg',StarWars.animation).each(function () {$(this)[0].setAttribute('viewBox', vbox) });
-                $('#logosvg',StarWars.animation).show();
-                $('#logoimg',StarWars.animation).hide();
-            }else{ // if the logo text is "Star Wars" set to the logo SVG.
-                $('#logosvg',StarWars.animation).hide();
-                $('#logoimg',StarWars.animation).show();
-            }
-
-            var play = function(){
-                $.when(StarWars.audioDefer).then(function(){
-                    var buffered = StarWars.audio.buffered.end(StarWars.audio.buffered.length-1);
-                    if(buffered == 0 && !audioIsLoaded){
-                        //unsetLoading();
-                        /*
-                        playbutton = $('<div class="verticalWrapper"><div class="playAudio"><button id="playBut" class="playButton" style="font-size: 80px">Play</button></div></div>');
-                        $('body').append(playbutton);
-                        $('#playBut',playbutton).click(function(){
-                            //setLoading();
-                            //playbutton.remove();
-                        });
-                        */
-                        StarWars.audio.oncanplaythrough = function () {
-                            notPlayed = false;
-                            StarWars.play();
-                        };
-                    }else{
-                        notPlayed = false;
-                        StarWars.play();
-                    }
-                });
-            };
-
+    $.when(StarWars.audioDefer).then(function(){
+        var buffered = StarWars.audio.buffered.end(StarWars.audio.buffered.length-1);
+        if(buffered == 0 && !audioIsLoaded){
+            //unsetLoading();
             /*
-                if(document.hasFocus()){ // play if has focus
-                        play();
-                }else{
-                    $(window).focus(function(){ // play when got focus
-                        if(notPlayed){
-                            play();
-                        }
-                    });
-                }
-               */
-            play();
-
-            //},
-            //error: ajaxErrorFunction('Error when try to load the intro '+key)
-            //});
-        }catch(error){
-            location.hash = "";
-            //setLoading();
+            playbutton = $('<div class="verticalWrapper"><div class="playAudio"><button id="playBut" class="playButton" style="font-size: 80px">Play</button></div></div>');
+            $('body').append(playbutton);
+            $('#playBut',playbutton).click(function(){
+                //setLoading();
+                //playbutton.remove();
+            });
+            */
+            StarWars.audio.oncanplaythrough = function () {
+                notPlayed = false;
+                StarWars.play();
+            };
+        }else{
+            notPlayed = false;
+            StarWars.play();
         }
+    });
 });
 
 function getInternetExplorerVersion()

@@ -77,6 +77,10 @@ StarWarsOpening = (function() {
         if($('.start').css('display') === 'block')
             $('body').removeClass('running');
       },10000);
+        setTimeout(()=>{
+          console.log("done with animation!")
+          punchit();
+        }, 105*1000);
 
     }, this));
   }
@@ -100,13 +104,27 @@ StarWarsOpening = (function() {
   };
 
   StarWarsOpening.prototype.play = function(){
+      this.audio.play().then(()=>{
+          console.log("playing");
+          this.runAnimation();
+      }).catch(err=>{
+          console.error(err);
+          console.log("failed to play audio.. showing start button");
+          $("#loader").show();
+          $("#loader").click(()=>{
+              $("#loader").hide();
+              console.log("trying");
+              this.play();
+          });
+      });
+  };
+  StarWarsOpening.prototype.runAnimation = function() {
       this.start.hide();
       $('.pageHide').hide();
       //unsetLoading(); // grants the loader to hide. Sometimes doesn't hide, maybe due to history navigation in browser.
       $('body').removeClass('running');
       $('body').addClass('running');
       $('body').scrollTop(0);
-      this.audio.play();
       this.el.append(this.animation);
 
       // adjust animation speed
@@ -130,7 +148,7 @@ StarWarsOpening = (function() {
             if(cssRule)
                 cssRule.appendRule("100% { top: "+ animDist +"% }");
       }
-  }
+  };
 
   return StarWarsOpening;
 })();

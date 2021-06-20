@@ -51,8 +51,10 @@
     <source src="tfa.mp3" type="audio/mpeg" />
   </audio>
 
-  <!--
   <div id="loader" class="verticalWrapper" style="display:none">
+      <div class="conWarp" style="top: 75%; z-index: 100; opacity: 1.0">
+          <span class="playButton btn" style="background-color: #333; opacity: 1.0;">Play Intro!</span>
+      </div>
     <div class="inner">
         <div class="bb8">
           <div class="bb8-top">
@@ -88,7 +90,6 @@
         </div>
     </div>
   </div>
-  -->
 
   <div class="animation">
 
@@ -112,7 +113,6 @@
 
     <div class="verticalWrapper">
         <section class="logo noselect">
-          <img id="logoimg" src="logo.svg" />
           <svg id="logosvg" viewBox="0 0 750 500">
               <text letter-spacing="15px" x="50%" y="66%" text-anchor="middle" fill="none" stroke-width="8px" stroke="#ffd54e"></text>
               <text letter-spacing="15px" x="50%" y="98%" text-anchor="middle" fill="none" stroke-width="8px" stroke="#ffd54e"></text>
@@ -152,10 +152,6 @@ $(document).scroll(function (e) {
         $('body').scrollTop(val);
     }
 })
-setTimeout(()=>{
-  console.log("done with animation!")
-  punchit();
-}, 105*1000);
 </script>
 <script src="StarWars.js"></script>
 <script src="main.js"></script>
