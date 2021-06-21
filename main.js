@@ -13,6 +13,7 @@ const episodes = [
         "title": "Center for Open NeuroScience", //will be uppercased (must be short)
 
         "text": "Open source is not only the most efficient paradigm for scalability and collaboration, it facilitates verification and reproducibility.\n\nScientific community is blooming with bright minds doing great research and sharing powerful software solutions and data collections.\n\nScientific software is developed by enthusiasts, who neither have facilities nor funds to support large-scale promotion or reliable distribution.",
+        "targeturl": "https://centerforopenneuroscience.org/",
     },
     {
         "center": true,
@@ -23,6 +24,7 @@ const episodes = [
         "title": "brainlife.io", //will be uppercased (keep it short!)
 
         "text": "brainlife.io: A Free cloud platform for secure neuroscience data analysis!\n\nNeuroscience is engaging at the forefront of science by dissolving disciplinary boundaries and promoting transdisciplinary research. This process can facilitate discovery by convergent efforts from theoretical, experimental and cognitive neuroscience, as well as computer science and engineering.\n\nTo assure the success of this process, the current lack of established mechanisms to promote open sharing data, software and scientific results must be overcome. Promoting open software and data sharing has become paramount to addressing the problem of scientific reproducibility.\n\nbrainlife.io addresses challenges to neuroscience open sharing and reproducibility by providing integrative mechanisms for publishing data, and algorithms while embedding them with computing resources to impact multiple scientific communities.\n\nTry brainlife.io today to experience the power of open platform!",
+        "targeturl": "https://brainlife.io/",
     },
 ];
 
@@ -36,10 +38,13 @@ var loadData = function () {
         audioIsLoaded = true;
     }
 };
+// default, to be overriden by chosen episode
+var targeturl = "https://centerforopenneuroscience.org";
+
 document.body.addEventListener('touchstart', loadData);
 
 function punchit() {
-    document.location = 'https://centerforopenneuroscience.org/';
+    document.location = targeturl;
 }
 
 // prevent arrow scrolling in firefox
@@ -145,6 +150,7 @@ $(window).on('hashchange', function() {
         console.log("Caught {err}")
     }
     const opening = episodes[counter%episodes.length];
+    targeturl = opening.targeturl;
     StarWars.opening = opening;
     console.log("picked episode", opening, counter);
 
