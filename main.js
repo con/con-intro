@@ -133,10 +133,18 @@ $(window).on('hashchange', function() {
     //    edit = params[1] === "edit";
     //}catch(e){}
     $('body').removeClass('running');
-    let counter = localStorage.getItem("counter") || Math.floor(Math.random()*100);
-    counter++;
-    localStorage.setItem("counter", counter);
-    const opening = episodes[counter%episodes.length]; 
+    // (third-party) cookies policy might be preventing localStorage access
+    let counter = Math.floor(Math.random()*100) + 1;
+    try {
+        // yoh: not sure if set here counter would be seen outside of the {}
+        counter = localStorage.getItem("counter") || Math.floor(Math.random()*100);
+        counter++;
+        localStorage.setItem("counter", counter);
+    }
+    catch(err) {
+        console.log("Caught {err}")
+    }
+    const opening = episodes[counter%episodes.length];
     StarWars.opening = opening;
     console.log("picked episode", opening, counter);
 
